@@ -64,12 +64,14 @@ CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.RAW.COMPETITIONS (
 );
 
 CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.RAW.PLAYER_VALUATIONS (
-    player_id                               NUMBER PRIMARY KEY,
-    date                                    DATE PRIMARY KEY,
+    player_id                               NUMBER,
+    date                                    DATE,
     market_value_in_eur                     NUMBER,
     current_club_name                       STRING,
     current_club_id                         NUMBER,
-    player_club_domestic_competition_id     STRING
+    player_club_domestic_competition_id     STRING,
+
+    PRIMARY KEY(player_id, date)
 );
 
 CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.RAW.APPEARANCES (
@@ -153,7 +155,7 @@ CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.DIM_COMPETITION (
 );
 
 CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.FCT_PLAYER_SEASON (
-    season_id                               NUMBER,
+    season_id                               NUMBER PRIMARY KEY,
     player_id                               NUMBER,
     club_id                                 NUMBER,
     competition_id                          NUMBER,
