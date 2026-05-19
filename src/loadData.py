@@ -95,10 +95,9 @@ def main():
 
 
     path = os.getenv("DATASET_PATH")
-    file = glob.glob(os.path.join(path, "*"))
 
     print(f"path = {path}")
-    cur.execute(f"PUT file://{file}/players.csv @processed_data AUTO_COMPRESS=FALSE")
+    cur.execute(f"PUT file://{path}/players.csv @processed_data AUTO_COMPRESS=FALSE")
 
     cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;")
     cur.execute(
