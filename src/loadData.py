@@ -91,7 +91,7 @@ def main():
 
     cur.execute("USE SCHEMA JUGADORES_FUTBOL_DB.RAW;")
 
-    path = glob.glob(os.environ["DATASET_PATH"])
+    path = glob.glob(os.getenv("DATASET_PATH"))
     cur.execute(f"PUT file://{path}/players.csv @processed_data AUTO_COMPRESS=FALSE")
 
     cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;")
