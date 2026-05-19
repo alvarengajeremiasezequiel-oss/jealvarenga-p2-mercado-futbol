@@ -86,16 +86,11 @@ def main():
     print(" Loading data into jugadores_futbol_db.raw")
 
 
+    cur.execute("USE SCHEMA JUGADORES_FUTBOL_DB.RAW;")
+
+    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;")
     cur.execute(
         """
-            USE SCHEMA JUGADORES_FUTBOL_DB.RAW;
-        """
-    )
-
-    cur.execute(
-        """
-        CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;
-
         COPY INTO TMP_PLAYERS
         FROM @raw_data
         FILE_FORMAT = (FORMAT_NAME = ff_jugadores_csv)
