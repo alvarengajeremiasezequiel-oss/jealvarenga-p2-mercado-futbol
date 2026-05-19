@@ -79,6 +79,8 @@ def main():
     print(" Connected to Snowflake")
 
     exec_sql_file(conn, "sql/initDatabase.sql")
+    exec_sql_file(conn, "sql/createTables.sql")
+    
 
     # --------------------------------------------------
     # Load into table
