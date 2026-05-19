@@ -100,23 +100,23 @@ def main():
 
 
     cur.execute(f"PUT file://{path}/players.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populatePlayers.csv")
+    exec_sql_file(conn, "sql/raw/populatePlayers.sql")
     players_rows = cur.fetchone()[0]
 
     cur.execute(f"PUT file://{path}/clubs.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateClubs.csv")
+    exec_sql_file(conn, "sql/raw/populateClubs.sql")
     clubs_rows = cur.fetchone()[0]
 
     cur.execute(f"PUT file://{path}/competitions.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateCompetitions.csv")
+    exec_sql_file(conn, "sql/raw/populateCompetitions.sql")
     competitions_rows = cur.fetchone()[0]
 
     cur.execute(f"PUT file://{path}/player_valuations.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populatePlayerValuations.csv")
+    exec_sql_file(conn, "sql/raw/populatePlayerValuations.sql")
     player_valuations_rows = cur.fetchone()[0]
 
     cur.execute(f"PUT file://{path}/appearances.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateAppearances.csv")
+    exec_sql_file(conn, "sql/raw/populateAppearances.sql")
     appearances_rows = cur.fetchone()[0]
 
     print(str(players_rows) + " rows inserted\n Load complete")
