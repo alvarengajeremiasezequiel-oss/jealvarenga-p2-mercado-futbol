@@ -97,32 +97,33 @@ def main():
     path = os.getenv("DATASET_PATH")
 
     print(f"path = {path}")
+
+
     cur.execute(f"PUT file://{path}/players.csv @raw_data AUTO_COMPRESS=FALSE")
-
-    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;")
-    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_CLUBS LIKE JUGADORES_FUTBOL_DB.RAW.CLUBS;")
-    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_COMPETITIONS LIKE JUGADORES_FUTBOL_DB.RAW.COMPETITIONS;")
-    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYER_VALUATIONS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYER_VALUATIONS;")
-    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_APPEARANCES LIKE JUGADORES_FUTBOL_DB.RAW.APPEARANCES;")
-
-    
-
-    cur.execute("SELECT players_result;")
+    exec_sql_file(conn, "sql/raw/populatePlayers.csv")
     players_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT clubs_result;")
+    cur.execute(f"PUT file://{path}/clubs.csv @raw_data AUTO_COMPRESS=FALSE")
+    exec_sql_file(conn, "sql/raw/populateClubs.csv")
     clubs_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT competitions_result;")
+    cur.execute(f"PUT file://{path}/competitions.csv @raw_data AUTO_COMPRESS=FALSE")
+    exec_sql_file(conn, "sql/raw/populateCompetitions.csv")
     competitions_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT player_valuations_result;")
+    cur.execute(f"PUT file://{path}/player_valuations.csv @raw_data AUTO_COMPRESS=FALSE")
+    exec_sql_file(conn, "sql/raw/populatePlayerValuations.csv")
     player_valuations_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT appearances_result;")
+    cur.execute(f"PUT file://{path}/appearances.csv @raw_data AUTO_COMPRESS=FALSE")
+    exec_sql_file(conn, "sql/raw/populateAppearances.csv")
     appearances_rows = cur.fetchone()[0]
 
     print(str(players_rows) + " rows inserted\n Load complete")
+    print(str(clubs_rows) + " rows inserted\n Load complete")
+    print(str(competitions_rows) + " rows inserted\n Load complete")
+    print(str(player_valuations_rows) + " rows inserted\n Load complete")
+    print(str(appearances_rows) + " rows inserted\n Load complete")
 
     
     # Cleanup
