@@ -1,8 +1,8 @@
-name: pipeline-analisis-de-contratos
+name: pipeline-jugadores-de-futbol
 
 on:
   push:
-    branches: [ actions-pipeline ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
