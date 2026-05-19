@@ -112,7 +112,7 @@ def main():
     cur.execute(
         """
         MERGE INTO PLAYERS t
-        USING STAGING_PLAYERS s
+        USING TMP_PLAYERS s
         ON t.player_id = s.player_id
         WHEN NOT MATCHED THEN
             INSERT ALL BY NAME;
