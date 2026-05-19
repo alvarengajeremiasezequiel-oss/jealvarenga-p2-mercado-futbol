@@ -101,7 +101,10 @@ def main():
         FILE_FORMAT = (FORMAT_NAME = ff_jugadores_csv)
         FILES = ('players.csv')
         ON_ERROR = 'ABORT_STATEMENT';
-
+        """
+    )
+    cur.execute(
+        """
         MERGE INTO PLAYERS t
         USING STAGING_PLAYERS s
         ON t.player_id = s.player_id
