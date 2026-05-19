@@ -24,6 +24,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run data pipeline
+        env:
+            SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+            SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+            SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
         run: |
           python src/extractFile.py
           python src/loadData.py
