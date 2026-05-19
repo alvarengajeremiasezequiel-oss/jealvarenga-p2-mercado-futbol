@@ -65,7 +65,7 @@ FILE_FORMAT = (FORMAT_NAME = ff_jugadores_csv)
 FILES = ('player_valuations.csv')
 ON_ERROR = 'ABORT_STATEMENT';
 
-MERGE INTO TMP_PLAYER_VALUATIONS t
+MERGE INTO PLAYER_VALUATIONS t
 USING TMP_PLAYER_VALUATIONS s
 ON (t.player_id = s.player_id AND t.date = s.date)
 WHEN NOT MATCHED THEN
