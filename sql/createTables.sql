@@ -179,3 +179,79 @@ CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.RAW.STAGING_APPEARANCES (
     minutes_played                          NUMBER
 );
 
+
+CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.DIM_PLAYER (
+    player_id                               NUMBER PRIMARY KEY,
+    first_name                              STRING,
+    last_name                               STRING,
+    name                                    STRING,
+    last_season                             NUMBER,
+    current_club_id                         NUMBER,
+    player_code                             STRING,
+    country_of_birth                        STRING,
+    city_of_birth                           STRING,
+    country_of_citizenship                  STRING,
+    date_of_birth                           TIMESTAMP_NTZ,
+    sub_position                            STRING,
+    position                                STRING,
+    foot                                    STRING,
+    height_in_cm                            NUMBER,
+    contract_expiration_date                DATE,
+    agent_name                              STRING,
+    image_url                               STRING,
+    international_goals                     NUMBER,
+    international_caps                      NUMBER,
+    current_national_team_id                NUMBER,
+    url                                     STRING,
+    current_club_domestic_competition_id    STRING,
+    current_club_name                       STRING,
+    market_value_in_eur                     NUMBER,
+    highest_market_value_in_eur             NUMBER
+);
+
+CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.DIM_CLUB (
+    club_id                                 NUMBER PRIMARY KEY,
+    club_code                               STRING,
+    name                                    STRING,
+    domestic_competition_id                 STRING,
+    total_market_value                      NUMBER,
+    squad_size                              NUMBER,
+    average_age                             NUMBER,
+    foreigners_number                       NUMBER,
+    foreigners_percentage                   NUMBER(4,1),
+    national_team_players                   NUMBER,
+    stadium_name                            STRING,
+    stadium_seats                           NUMBER,
+    net_transfer_record                     STRING,
+    coach_name                              STRING,
+    last_season                             NUMBER,
+    filename                                STRING,
+    url                                     STRING
+);
+
+CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.DIM_COMPETITION (
+    competition_id                          STRING PRIMARY KEY,
+    competition_code                        STRING,
+    name                                    STRING,
+    sub_type                                STRING,
+    type                                    STRING,
+    country_id                              NUMBER,
+    country_name                            STRING,
+    domestic_league_code                    STRING,
+    confederation                           STRING,
+    total_clubs                             NUMBER,
+    url                                     STRING
+);
+
+CREATE TABLE IF NOT EXISTS JUGADORES_FUTBOL_DB.SILVER.FCT_PLAYER_SEASON (
+    season_id                               NUMBER,
+    player_id                               NUMBER,
+    club_id                                 NUMBER,
+    competition_id                          NUMBER,
+    average_market_value                    NUMBER,
+    yellow_cards                            NUMBER,
+    red_cards                               NUMBER,
+    average_time                            NUMBER,
+    goals                                   NUMBER,
+    assists                                 NUMBER
+);
