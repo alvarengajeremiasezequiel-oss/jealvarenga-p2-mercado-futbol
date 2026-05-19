@@ -107,19 +107,19 @@ def main():
 
     
 
-    cur.execute("SELECT players_result")
+    cur.execute("SELECT players_result;")
     players_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT clubs_result")
+    cur.execute("SELECT clubs_result;")
     clubs_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT competitions_result")
+    cur.execute("SELECT competitions_result;")
     competitions_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT player_valuations_result")
+    cur.execute("SELECT player_valuations_result;")
     player_valuations_rows = cur.fetchone()[0]
 
-    cur.execute("SELECT appearances_result")
+    cur.execute("SELECT appearances_result;")
     appearances_rows = cur.fetchone()[0]
 
     print(str(players_rows) + " rows inserted\n Load complete")

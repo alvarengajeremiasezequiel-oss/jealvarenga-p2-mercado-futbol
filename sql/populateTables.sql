@@ -14,7 +14,7 @@ ON t.player_id = s.player_id
 WHEN NOT MATCHED THEN
     INSERT ALL BY NAME;
 
-LET players_result = (
+SET players_result = (
     SELECT "number of rows inserted"
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 );
@@ -33,7 +33,7 @@ ON t.club_id = s.club_id
 WHEN NOT MATCHED THEN
     INSERT ALL BY NAME;
 
-LET clubs_result = (
+SET clubs_result = (
     SELECT "number of rows inserted"
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 );
@@ -52,7 +52,7 @@ ON t.competition_id = s.competition_id
 WHEN NOT MATCHED THEN
     INSERT ALL BY NAME;
 
-LET competitions_result = (
+SET competitions_result = (
     SELECT "number of rows inserted"
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 );
@@ -71,7 +71,7 @@ ON (t.player_id = s.player_id AND t.date = s.date)
 WHEN NOT MATCHED THEN
     INSERT ALL BY NAME;
 
-LET players_valuations_result = (
+SET players_valuations_result = (
     SELECT "number of rows inserted"
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 );
@@ -90,7 +90,7 @@ ON t.appearance_id = s.appearance_id
 WHEN NOT MATCHED THEN
     INSERT ALL BY NAME;
 
-LET appearances_result = (
+SET appearances_result = (
     SELECT "number of rows inserted"
     FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()))
 );
