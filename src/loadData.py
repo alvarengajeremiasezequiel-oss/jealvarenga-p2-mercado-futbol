@@ -100,35 +100,29 @@ def main():
     cur.execute(f"PUT file://{path}/players.csv @raw_data AUTO_COMPRESS=FALSE")
 
     cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS;")
-    cur.execute(
-        """
-        COPY INTO TMP_PLAYERS
-        FROM @raw_data
-        FILE_FORMAT = (FORMAT_NAME = ff_jugadores_csv)
-        FILES = ('players.csv')
-        ON_ERROR = 'ABORT_STATEMENT';
-        """
-    )
-    cur.execute(
-        """
-        MERGE INTO PLAYERS t
-        USING TMP_PLAYERS s
-        ON t.player_id = s.player_id
-        WHEN NOT MATCHED THEN
-            INSERT ALL BY NAME;
-        """
-    )
+    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_CLUBS LIKE JUGADORES_FUTBOL_DB.RAW.CLUBS;")
+    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_COMPETITIONS LIKE JUGADORES_FUTBOL_DB.RAW.COMPETITIONS;")
+    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_PLAYERS_VALUATIONS LIKE JUGADORES_FUTBOL_DB.RAW.PLAYERS_VALUATIONS;")
+    cur.execute("CREATE OR REPLACE TEMP TABLE TMP_APPEARANCES LIKE JUGADORES_FUTBOL_DB.RAW.APPEARANCES;")
 
-    cur.execute(
-        """
-        SELECT
-            "number of rows inserted"
-        FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()));
-        """
-    )
-    rows_inserted = cur.fetchone()[0]
+    
 
-    print(str(rows_inserted) + "rows inserted\n Load complete")
+    cur.execute("SELECT players_result")
+    players_rows = cur.fetchone()[0]
+
+    cur.execute("SELECT clubs_result")
+    clubs_rows = cur.fetchone()[0]
+
+    cur.execute("SELECT competitions_result")
+    competitions_rows = cur.fetchone()[0]
+
+    cur.execute("SELECT player_valuations_result")
+    player_valuations_rows = cur.fetchone()[0]
+
+    cur.execute("SELECT appearances_result")
+    appearances_rows = cur.fetchone()[0]
+
+    print(str(players_rows) + " rows inserted\n Load complete")
 
     
     # Cleanup
