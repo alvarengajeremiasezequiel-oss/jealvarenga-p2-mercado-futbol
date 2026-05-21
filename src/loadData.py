@@ -133,10 +133,11 @@ def main():
         FROM JUGADORES_FUTBOL_DB.INFORMATION_SCHEMA.TABLES
         WHERE TABLE_SCHEMA = 'SILVER';
     """)
-    cur.fetchone()[0]
+    silver_num_tables = cur.fetchone()[0]
 
     if ( players_rows | clubs_rows |competitions_rows |
-        player_valuations_rows | appearances_rows):
+        player_valuations_rows | appearances_rows |
+        (silver_num_tables != 4)):
         exec_sql_file(conn, "sql/silver/populateSilver.sql")
 
     cur.close()
