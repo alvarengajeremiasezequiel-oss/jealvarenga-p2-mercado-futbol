@@ -126,9 +126,18 @@ def main():
     # --------------------------------------------------
     # Load into silver tables
     # --------------------------------------------------
+
+    cur.execute(
+    """
+        SELECT COUNT(*) AS num_tables
+        FROM JUGADORES_FUTBOL_DB.INFORMATION_SCHEMA.TABLES
+        WHERE TABLE_SCHEMA = 'SILVER';
+    """)
+    cur.fetchone()[0]
+
     if ( players_rows | clubs_rows |competitions_rows |
         player_valuations_rows | appearances_rows):
-        exec_sql_file(conn, "sql/populateSilver.sql")
+        exec_sql_file(conn, "sql/silver/populateSilver.sql")
 
     cur.close()
     conn.close()
