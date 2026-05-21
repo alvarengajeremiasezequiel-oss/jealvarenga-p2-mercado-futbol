@@ -109,11 +109,11 @@ def main():
     cur.execute(f"PUT file://{path}/appearances.csv @raw_data AUTO_COMPRESS=FALSE")
     appearances_rows =       exec_sql_file(conn, "sql/raw/populateAppearances.sql")
 
-    print("Raw table players:"           + str(players_rows)           + " rows inserted\n Load complete")
-    print("Raw table clubs:"             + str(clubs_rows)             + " rows inserted\n Load complete")
-    print("Raw table competitiions"      + str(competitions_rows)      + " rows inserted\n Load complete")
-    print("Raw table player_valuations"  + str(player_valuations_rows) + " rows inserted\n Load complete")
-    print("Raw table appearances"        + str(appearances_rows)       + " rows inserted\n Load complete")
+    print("Raw table players:           " + str(players_rows)           + " rows inserted\n Load complete")
+    print("Raw table clubs:             " + str(clubs_rows)             + " rows inserted\n Load complete")
+    print("Raw table competitions:      " + str(competitions_rows)      + " rows inserted\n Load complete")
+    print("Raw table player_valuations: " + str(player_valuations_rows) + " rows inserted\n Load complete")
+    print("Raw table appearances:       " + str(appearances_rows)       + " rows inserted\n Load complete")
 
     # Raw temp tables cleanup
     cur.execute("DROP TABLE IF EXISTS TMP_PLAYERS")
@@ -126,8 +126,9 @@ def main():
     # --------------------------------------------------
     # Load into silver tables
     # --------------------------------------------------
-
-    
+    if ( players_rows | clubs_rows |competitions_rows |
+        player_valuations_rows | appearances_rows):
+        exec_sql_file(conn, "sql/populateSilver.sql")
 
     cur.close()
     conn.close()
