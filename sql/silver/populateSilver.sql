@@ -42,10 +42,10 @@ player_season_keys AS (
     SELECT player_id, season FROM appearances_season
 )
 SELECT
-    CAST(k.player_id AS NUMBER) AS player_id,
-    CAST(k.season AS NUMBER) AS season,
-    CAST(COALESCE(aps.player_current_club_id, pb.current_club_id) AS NUMBER) AS club_id,
-    CAST(COALESCE(aps.competition_id, pb.current_club_domestic_competition_id) AS STRING) AS competition_id,
+    CAST(k.player_id AS NUMBER)                          AS player_id,
+    CAST(k.season AS NUMBER)                             AS season,
+    CAST(COALESCE(aps.player_current_club_id, pb.current_club_id, -1) AS NUMBER)              AS club_id,
+    CAST(COALESCE(aps.competition_id, pb.current_club_domestic_competition_id, -1) AS STRING) AS competition_id,
     CAST(COALESCE(aps.yellow_cards, 0) AS NUMBER) AS yellow_cards,
     CAST(COALESCE(aps.red_cards,    0) AS NUMBER) AS red_cards,
     CAST(COALESCE(aps.goals,        0) AS NUMBER) AS goals,

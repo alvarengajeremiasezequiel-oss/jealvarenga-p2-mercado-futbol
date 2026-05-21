@@ -1,6 +1,7 @@
 import glob
 import os
 from pathlib import Path
+import time
 import snowflake.connector
 from cryptography.hazmat.primitives import serialization
 
@@ -124,7 +125,7 @@ def main():
 
     
     # --------------------------------------------------
-    # Load into silver tables
+    # Load into silver and gold tables
     # --------------------------------------------------
 
     cur.execute(
@@ -138,8 +139,10 @@ def main():
     if ( players_rows | clubs_rows |competitions_rows |
         player_valuations_rows | appearances_rows |
         (silver_num_tables != 4)):
+        print(time.strftime("%Y-%m-%d %H:%M:%S"), "- Updating silver and gold layer tables...")
         exec_sql_file(conn, "sql/silver/populateSilver.sql")
-
+        exec_sql_file(conn, "sql/gold/populateGold.sql")
+        
     cur.close()
     conn.close()
 
