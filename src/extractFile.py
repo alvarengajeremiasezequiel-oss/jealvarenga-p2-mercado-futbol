@@ -37,8 +37,5 @@ try:
 
     save_env_var("DATASET_PATH", path)
 
-    print("GITHUB_ENV:", os.environ.get("GITHUB_ENV"))
-    print("Loaded DATASET_PATH:", os.getenv("DATASET_PATH"))
-
 except Exception as e:
     print(f"Error during check: {e}")

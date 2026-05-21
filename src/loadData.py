@@ -58,8 +58,10 @@ def exec_sql_file(conn, path: str):
     try:
         for stmt in statements:
             cur.execute(stmt)
+        last_output = cur.fetchone()[0]
     finally:
         cur.close()
+    return last_output
 
 
 def main():
@@ -84,50 +86,48 @@ def main():
     
 
     # --------------------------------------------------
-    # Load into table
+    # Load into raw tables
     # --------------------------------------------------
     print(" Loading data into jugadores_futbol_db.raw")
 
-    print("GITHUB_ENV:", os.environ.get("GITHUB_ENV"))
-    print("Loaded DATASET_PATH:", os.getenv("DATASET_PATH"))
-
     cur.execute("USE SCHEMA JUGADORES_FUTBOL_DB.RAW;")
-
 
     path = os.getenv("DATASET_PATH")
 
-    print(f"path = {path}")
-
-
     cur.execute(f"PUT file://{path}/players.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populatePlayers.sql")
-    players_rows = cur.fetchone()[0]
+    players_rows =           exec_sql_file(conn, "sql/raw/populatePlayers.sql")
 
     cur.execute(f"PUT file://{path}/clubs.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateClubs.sql")
-    clubs_rows = cur.fetchone()[0]
+    clubs_rows =             exec_sql_file(conn, "sql/raw/populateClubs.sql")
 
     cur.execute(f"PUT file://{path}/competitions.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateCompetitions.sql")
-    competitions_rows = cur.fetchone()[0]
+    competitions_rows =      exec_sql_file(conn, "sql/raw/populateCompetitions.sql")
 
     cur.execute(f"PUT file://{path}/player_valuations.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populatePlayerValuations.sql")
-    player_valuations_rows = cur.fetchone()[0]
+    player_valuations_rows = exec_sql_file(conn, "sql/raw/populatePlayerValuations.sql")
 
     cur.execute(f"PUT file://{path}/appearances.csv @raw_data AUTO_COMPRESS=FALSE")
-    exec_sql_file(conn, "sql/raw/populateAppearances.sql")
-    appearances_rows = cur.fetchone()[0]
+    appearances_rows =       exec_sql_file(conn, "sql/raw/populateAppearances.sql")
 
-    print(str(players_rows) + " rows inserted\n Load complete")
-    print(str(clubs_rows) + " rows inserted\n Load complete")
-    print(str(competitions_rows) + " rows inserted\n Load complete")
-    print(str(player_valuations_rows) + " rows inserted\n Load complete")
-    print(str(appearances_rows) + " rows inserted\n Load complete")
+    print("Raw table players:"           + str(players_rows)           + " rows inserted\n Load complete")
+    print("Raw table clubs:"             + str(clubs_rows)             + " rows inserted\n Load complete")
+    print("Raw table competitiions"      + str(competitions_rows)      + " rows inserted\n Load complete")
+    print("Raw table player_valuations"  + str(player_valuations_rows) + " rows inserted\n Load complete")
+    print("Raw table appearances"        + str(appearances_rows)       + " rows inserted\n Load complete")
+
+    # Raw temp tables cleanup
+    cur.execute("DROP TABLE IF EXISTS TMP_PLAYERS")
+    cur.execute("DROP TABLE IF EXISTS TMP_CLUBS")
+    cur.execute("DROP TABLE IF EXISTS TMP_COMPETITIONS")
+    cur.execute("DROP TABLE IF EXISTS TMP_PLAYER_VALUATIONS")
+    cur.execute("DROP TABLE IF EXISTS TMP_APPEARANCES")
 
     
-    # Cleanup
-    cur.execute("DROP TABLE IF EXISTS TMP_PLAYERS")
+    # --------------------------------------------------
+    # Load into silver tables
+    # --------------------------------------------------
+
+    
 
     cur.close()
     conn.close()
