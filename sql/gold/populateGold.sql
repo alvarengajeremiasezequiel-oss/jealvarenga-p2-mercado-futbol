@@ -13,7 +13,8 @@ SELECT
     AVG(average_time)         AS avg_minutes_played,
     AVG(average_market_value) AS avg_market_value
 FROM JUGADORES_FUTBOL_DB.SILVER.FCT_PLAYER_SEASON
-GROUP BY season;
+GROUP BY season
+ORDER BY season;
 
 
 CREATE OR REPLACE TABLE JUGADORES_FUTBOL_DB.GOLD.DIM_PLAYER AS
