@@ -1,0 +1,31 @@
+relationship 92b7e52c-6c29-47a1-a19a-332f65011a26
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_PLAYER.DATE_OF_BIRTH
+	toColumn: LocalDateTable_b579b389-5fc8-443d-9b22-586ec727f822.Date
+
+relationship 7eb2ce80-33a3-4798-b1a1-3ecbe94240b6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DIM_PLAYER.CONTRACT_EXPIRATION_DATE
+	toColumn: LocalDateTable_ff3571cf-23d2-4aa5-8b3d-f00353217fce.Date
+
+relationship AutoDetected_7ec390d6-248c-40e0-b817-968f8a4a5be5
+	fromColumn: FCT_PLAYER_SEASON.COMPETITION_ID
+	toColumn: DIM_COMPETITION.COMPETITION_ID
+
+relationship AutoDetected_0f954233-4ff5-40b3-b7d1-c0b11c1ebeeb
+	fromColumn: FCT_PLAYER_SEASON.PLAYER_ID
+	toColumn: DIM_PLAYER.PLAYER_ID
+
+relationship AutoDetected_afd92d69-8619-4cb9-9ca5-ce50be98ee6b
+	fromColumn: FCT_PLAYER_SEASON.SEASON
+	toColumn: DIM_SEASON.SEASON
+
+relationship 4880012c-c258-c163-bbaa-8b8f90491a2e
+	fromColumn: FCT_PLAYER_SEASON.CLUB_ID
+	toColumn: DIM_CLUB.CLUB_ID
+
+relationship 77a83144-c38c-38ee-974b-158c3a61c63b
+	isActive: false
+	fromColumn: DIM_PLAYER.CURRENT_CLUB_ID
+	toColumn: DIM_CLUB.CLUB_ID
+

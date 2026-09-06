@@ -1,0 +1,90 @@
+table DIM_SEASON
+	lineageTag: 11cc4a7d-c97b-4eb1-af4d-55d920a003ac
+
+	column SEASON
+		dataType: int64
+		lineageTag: b8179999-8adb-4256-bb6a-312e4ec8a123
+		summarizeBy: none
+		sourceColumn: SEASON
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_GOALS
+		dataType: double
+		lineageTag: a18a2373-7d38-4b08-991f-4ccabdd5b0b0
+		summarizeBy: none
+		sourceColumn: TOTAL_GOALS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_ASSISTS
+		dataType: double
+		lineageTag: 0b1c40a2-871e-48d7-9e98-d61ec4a720d0
+		summarizeBy: none
+		sourceColumn: TOTAL_ASSISTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_YELLOW_CARDS
+		dataType: double
+		lineageTag: 7ee4507e-6f58-49dc-9b13-7e9ba6adce01
+		summarizeBy: none
+		sourceColumn: TOTAL_YELLOW_CARDS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column TOTAL_RED_CARDS
+		dataType: double
+		lineageTag: e1f6e687-ae52-4575-a030-d7da3f0455d1
+		summarizeBy: none
+		sourceColumn: TOTAL_RED_CARDS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_MINUTES_PLAYED
+		dataType: double
+		lineageTag: d2a9639a-1dcb-4e44-bb27-d07ebcfa554b
+		summarizeBy: none
+		sourceColumn: AVG_MINUTES_PLAYED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_MARKET_VALUE
+		dataType: double
+		lineageTag: 70e7079e-ac7a-4778-8b15-f51b7b4e8efd
+		summarizeBy: none
+		sourceColumn: AVG_MARKET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition DIM_SEASON = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ykgydbq-yt09022.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    JUGADORES_FUTBOL_DB_Database = Source{[Name="JUGADORES_FUTBOL_DB",Kind="Database"]}[Data],
+				    GOLD_Schema = JUGADORES_FUTBOL_DB_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    DIM_SEASON_Table = GOLD_Schema{[Name="DIM_SEASON",Kind="Table"]}[Data]
+				in
+				    DIM_SEASON_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

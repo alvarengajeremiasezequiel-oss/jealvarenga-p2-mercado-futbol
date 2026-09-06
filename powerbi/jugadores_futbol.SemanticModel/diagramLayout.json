@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 239.46815492016805
+          },
+          "nodeIndex": "DIM_CLUB",
+          "nodeLineageTag": "453cbc91-ebd5-47d2-981f-739c14929260",
+          "size": {
+            "height": 523.5851900936309,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 331.63801198951791,
+            "y": 791.10764821769374
+          },
+          "nodeIndex": "DIM_COMPETITION",
+          "nodeLineageTag": "8d361207-8046-4a28-b47a-f15749135019",
+          "size": {
+            "height": 360.60132533127239,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 647.946423086678,
+            "y": 106.75939297539004
+          },
+          "nodeIndex": "DIM_PLAYER",
+          "nodeLineageTag": "6c3d6f45-becf-40cf-8ff5-d9616ebaaef0",
+          "size": {
+            "height": 805.69820655204057,
+            "width": 365.06798269321746
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 341.36973362569017,
+            "y": 25
+          },
+          "nodeIndex": "DIM_SEASON",
+          "nodeLineageTag": "11cc4a7d-c97b-4eb1-af4d-55d920a003ac",
+          "size": {
+            "height": 284.64266182821126,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 338.11012517871688,
+            "y": 355.409275765421
+          },
+          "nodeIndex": "FCT_PLAYER_SEASON",
+          "nodeLineageTag": "56d7d7a1-c742-4db2-825c-3fe21b94e149",
+          "size": {
+            "height": 373.28532365642252,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 56.447393005377741,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

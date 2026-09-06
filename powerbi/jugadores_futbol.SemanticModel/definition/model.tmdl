@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["DIM_CLUB","DIM_COMPETITION","DIM_PLAYER","DIM_SEASON","FCT_PLAYER_SEASON"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DIM_CLUB
+ref table DIM_COMPETITION
+ref table DIM_PLAYER
+ref table DateTableTemplate_847d5332-fcd1-4ad9-b03c-83205ab7726a
+ref table LocalDateTable_b579b389-5fc8-443d-9b22-586ec727f822
+ref table LocalDateTable_ff3571cf-23d2-4aa5-8b3d-f00353217fce
+ref table DIM_SEASON
+ref table FCT_PLAYER_SEASON
+
+ref cultureInfo en-US
+

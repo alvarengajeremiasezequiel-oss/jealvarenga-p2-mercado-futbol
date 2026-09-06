@@ -1,0 +1,180 @@
+table DIM_CLUB
+	lineageTag: 453cbc91-ebd5-47d2-981f-739c14929260
+
+	measure 'Total de mercado por club' = CALCULATE( SUM(DIM_PLAYER[MARKET_VALUE_IN_EUR]), USERELATIONSHIP(DIM_CLUB[CLUB_ID], DIM_PLAYER[CURRENT_CLUB_ID]))
+		lineageTag: 7778f4f6-12de-4de7-8e5f-deffae91b80e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLUB_ID
+		dataType: double
+		isHidden
+		lineageTag: 779de05d-d126-42bd-85d8-f72197afc2f1
+		summarizeBy: none
+		sourceColumn: CLUB_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLUB_CODE
+		dataType: string
+		lineageTag: 45d1af7e-df81-40b7-ba25-7984484d8945
+		summarizeBy: none
+		sourceColumn: CLUB_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME
+		dataType: string
+		lineageTag: 808cd267-3084-4866-9e8a-e4505ba7f1d1
+		summarizeBy: none
+		sourceColumn: NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column DOMESTIC_COMPETITION_ID
+		dataType: string
+		lineageTag: d02c91b6-ef09-499a-9170-f74b7e317bf0
+		summarizeBy: none
+		sourceColumn: DOMESTIC_COMPETITION_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_MARKET_VALUE
+		dataType: double
+		lineageTag: 7cb541ca-c529-4eb3-9bb6-eb0ac21b1af6
+		summarizeBy: none
+		sourceColumn: TOTAL_MARKET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SQUAD_SIZE
+		dataType: double
+		lineageTag: 3c912aeb-165d-4272-a88f-537d6decb091
+		summarizeBy: none
+		sourceColumn: SQUAD_SIZE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_AGE
+		dataType: double
+		lineageTag: d898eac7-12c3-458e-bfc2-4b25f9943aac
+		summarizeBy: none
+		sourceColumn: AVERAGE_AGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FOREIGNERS_NUMBER
+		dataType: double
+		lineageTag: 7c601f49-f9f7-4095-beb6-12de26e76876
+		summarizeBy: none
+		sourceColumn: FOREIGNERS_NUMBER
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FOREIGNERS_PERCENTAGE
+		dataType: double
+		lineageTag: 457df0b2-5f77-433b-bd41-964f936c6e26
+		summarizeBy: none
+		sourceColumn: FOREIGNERS_PERCENTAGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NATIONAL_TEAM_PLAYERS
+		dataType: double
+		lineageTag: e0d7c916-70dd-49a9-8a94-02d35cea5bc1
+		summarizeBy: none
+		sourceColumn: NATIONAL_TEAM_PLAYERS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column STADIUM_NAME
+		dataType: string
+		lineageTag: 729a3489-7e95-46a9-8906-9a095e359ef3
+		summarizeBy: none
+		sourceColumn: STADIUM_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column STADIUM_SEATS
+		dataType: double
+		lineageTag: ab6209cc-f2c2-4557-b85c-70455c1c3a7b
+		summarizeBy: none
+		sourceColumn: STADIUM_SEATS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column NET_TRANSFER_RECORD
+		dataType: string
+		lineageTag: 5dab2894-d4a2-4daf-9268-d288bcc54548
+		summarizeBy: none
+		sourceColumn: NET_TRANSFER_RECORD
+
+		annotation SummarizationSetBy = Automatic
+
+	column COACH_NAME
+		dataType: string
+		lineageTag: 0c79b29d-fee8-4323-b82d-3bd4cea80174
+		summarizeBy: none
+		sourceColumn: COACH_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_SEASON
+		dataType: double
+		lineageTag: b8ef8c9c-65b4-4c21-b50c-b25cd5dd70f0
+		summarizeBy: none
+		sourceColumn: LAST_SEASON
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FILENAME
+		dataType: string
+		lineageTag: 82c91a4e-1e3f-41e5-8f60-55c3847f842b
+		summarizeBy: none
+		sourceColumn: FILENAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL
+		dataType: string
+		lineageTag: 68c8e22a-4919-40cc-951c-350f2696ab9d
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_CLUB = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ykgydbq-yt09022.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    JUGADORES_FUTBOL_DB_Database = Source{[Name="JUGADORES_FUTBOL_DB",Kind="Database"]}[Data],
+				    GOLD_Schema = JUGADORES_FUTBOL_DB_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    DIM_CLUB_Table = GOLD_Schema{[Name="DIM_CLUB",Kind="Table"]}[Data]
+				in
+				    DIM_CLUB_Table
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

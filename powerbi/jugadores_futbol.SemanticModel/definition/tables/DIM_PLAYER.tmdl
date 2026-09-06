@@ -1,0 +1,281 @@
+table DIM_PLAYER
+	lineageTag: 6c3d6f45-becf-40cf-8ff5-d9616ebaaef0
+
+	measure 'Total de jugadores' = COUNT(DIM_PLAYER[PLAYER_ID])
+		formatString: 0
+		lineageTag: 9a4a7a9a-c93a-4cc1-8a45-59d1e566ca4c
+
+	measure 'Valor total de mercado actual' = SUM(DIM_PLAYER[MARKET_VALUE_IN_EUR])
+		lineageTag: 7c3d26b8-767b-4256-91c2-846a9f0db554
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAYER_ID
+		dataType: double
+		isHidden
+		lineageTag: 82e7ef21-786d-4c61-90ba-be5061565b16
+		summarizeBy: none
+		sourceColumn: PLAYER_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FIRST_NAME
+		dataType: string
+		lineageTag: 6612e29d-0e5d-499f-8eaf-b5651ac76b92
+		summarizeBy: none
+		sourceColumn: FIRST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_NAME
+		dataType: string
+		lineageTag: 6ac7b56f-f6db-4d67-ac04-868dd765388d
+		summarizeBy: none
+		sourceColumn: LAST_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column NAME
+		dataType: string
+		lineageTag: d9927a2e-c3c7-4ea6-8ba7-4126e0507168
+		summarizeBy: none
+		sourceColumn: NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column LAST_SEASON
+		dataType: double
+		lineageTag: 5a869e86-6056-4dbe-b00f-47639ff2b157
+		summarizeBy: sum
+		sourceColumn: LAST_SEASON
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURRENT_CLUB_ID
+		dataType: double
+		isHidden
+		lineageTag: a62acd64-4e06-46ed-b2c1-b709cfc48a13
+		summarizeBy: count
+		sourceColumn: CURRENT_CLUB_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAYER_CODE
+		dataType: string
+		lineageTag: 38af1afd-7f27-4624-8e27-8840858ebf1c
+		summarizeBy: none
+		sourceColumn: PLAYER_CODE
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_OF_BIRTH
+		dataType: string
+		lineageTag: d414e596-fbb0-4e2e-92f5-c98258061530
+		summarizeBy: none
+		sourceColumn: COUNTRY_OF_BIRTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column CITY_OF_BIRTH
+		dataType: string
+		lineageTag: 20522492-5548-49f1-8cdb-516aa774031e
+		summarizeBy: none
+		sourceColumn: CITY_OF_BIRTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column COUNTRY_OF_CITIZENSHIP
+		dataType: string
+		lineageTag: a3ca9638-0299-49a9-8fd9-a900734b10c5
+		summarizeBy: none
+		sourceColumn: COUNTRY_OF_CITIZENSHIP
+
+		annotation SummarizationSetBy = Automatic
+
+	column DATE_OF_BIRTH
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1d4a661d-4df1-4b46-b4c5-55aafdf57eb0
+		summarizeBy: none
+		sourceColumn: DATE_OF_BIRTH
+
+		variation Variation
+			isDefault
+			relationship: 92b7e52c-6c29-47a1-a19a-332f65011a26
+			defaultHierarchy: LocalDateTable_b579b389-5fc8-443d-9b22-586ec727f822.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SUB_POSITION
+		dataType: string
+		lineageTag: df5c87a7-1563-4600-9f92-38c626136c05
+		summarizeBy: none
+		sourceColumn: SUB_POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSITION
+		dataType: string
+		lineageTag: b3b84e7a-c1f9-4ef5-b201-878f4afba6fd
+		summarizeBy: none
+		sourceColumn: POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column FOOT
+		dataType: string
+		lineageTag: 520077f6-e2ac-40a9-8ffe-8415edfff0bd
+		summarizeBy: none
+		sourceColumn: FOOT
+
+		annotation SummarizationSetBy = Automatic
+
+	column HEIGHT_IN_CM
+		dataType: double
+		lineageTag: b349ef7c-4ca4-4269-aa40-eaf84666aa73
+		summarizeBy: sum
+		sourceColumn: HEIGHT_IN_CM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CONTRACT_EXPIRATION_DATE
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f5fc20a9-5e0c-422e-a548-9c94f6664c90
+		summarizeBy: none
+		sourceColumn: CONTRACT_EXPIRATION_DATE
+
+		variation Variation
+			isDefault
+			relationship: 7eb2ce80-33a3-4798-b1a1-3ecbe94240b6
+			defaultHierarchy: LocalDateTable_ff3571cf-23d2-4aa5-8b3d-f00353217fce.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column AGENT_NAME
+		dataType: string
+		lineageTag: 11d7a3de-3c50-4df5-8dc4-8ee724ebbafd
+		summarizeBy: none
+		sourceColumn: AGENT_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column IMAGE_URL
+		dataType: string
+		lineageTag: 87db5837-f67d-454e-bd51-df39c1f65054
+		summarizeBy: none
+		sourceColumn: IMAGE_URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNATIONAL_GOALS
+		dataType: double
+		lineageTag: 2a06fba6-e891-4936-a4a6-358597cc3e5c
+		summarizeBy: sum
+		sourceColumn: INTERNATIONAL_GOALS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INTERNATIONAL_CAPS
+		dataType: double
+		lineageTag: 59701fbd-a6db-4770-80a1-dc06f9ed6158
+		summarizeBy: sum
+		sourceColumn: INTERNATIONAL_CAPS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CURRENT_NATIONAL_TEAM_ID
+		dataType: double
+		isHidden
+		lineageTag: 45ad7a86-2ff7-4fde-98e2-94fd64a64dc2
+		summarizeBy: count
+		sourceColumn: CURRENT_NATIONAL_TEAM_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column URL
+		dataType: string
+		lineageTag: a6dae14f-4cb7-4143-a814-d0b02ec3ca97
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENT_CLUB_DOMESTIC_COMPETITION_ID
+		dataType: string
+		isHidden
+		lineageTag: cbcc1cde-b8e6-469f-b6d4-bfe5dff6297d
+		summarizeBy: none
+		sourceColumn: CURRENT_CLUB_DOMESTIC_COMPETITION_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CURRENT_CLUB_NAME
+		dataType: string
+		lineageTag: 5ab45e3f-df44-428e-9fd2-4c3915f8b972
+		summarizeBy: none
+		sourceColumn: CURRENT_CLUB_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column MARKET_VALUE_IN_EUR
+		dataType: double
+		lineageTag: 7ac4b380-85fa-4bde-8efe-646a865f5e5c
+		summarizeBy: sum
+		sourceColumn: MARKET_VALUE_IN_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HIGHEST_MARKET_VALUE_IN_EUR
+		dataType: double
+		lineageTag: 4d27f835-fb3a-4cc6-961a-d77c05f96889
+		summarizeBy: sum
+		sourceColumn: HIGHEST_MARKET_VALUE_IN_EUR
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition DIM_PLAYER = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ykgydbq-yt09022.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    JUGADORES_FUTBOL_DB_Database = Source{[Name="JUGADORES_FUTBOL_DB",Kind="Database"]}[Data],
+				    GOLD_Schema = JUGADORES_FUTBOL_DB_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    DIM_PLAYER_Table = GOLD_Schema{[Name="DIM_PLAYER",Kind="Table"]}[Data]
+				in
+				    DIM_PLAYER_Table
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

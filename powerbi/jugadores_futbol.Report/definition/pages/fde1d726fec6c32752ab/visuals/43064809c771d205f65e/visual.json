@@ -1,0 +1,59 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "43064809c771d205f65e",
+  "position": {
+    "x": 10,
+    "y": 0,
+    "z": 0,
+    "height": 720,
+    "width": 844,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FCT_PLAYER_SEASON"
+                    }
+                  },
+                  "Property": "GOALS"
+                }
+              },
+              "queryRef": "Sum(FCT_PLAYER_SEASON.GOALS)",
+              "nativeQueryRef": "Puntuación",
+              "active": true,
+              "displayName": "Puntuación"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FCT_PLAYER_SEASON"
+                    }
+                  },
+                  "Property": "AVERAGE_MARKET_VALUE"
+                }
+              },
+              "queryRef": "Sum(FCT_PLAYER_SEASON.AVERAGE_MARKET_VALUE)",
+              "nativeQueryRef": "Valor de mercado medio",
+              "displayName": "Valor de mercado medio"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

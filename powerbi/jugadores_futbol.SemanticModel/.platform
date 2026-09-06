@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "jugadores_futbol"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9bad67d2-f838-47d6-9db6-8360f4d05f67"
+  }
+}

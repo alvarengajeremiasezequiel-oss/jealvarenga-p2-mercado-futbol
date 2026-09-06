@@ -1,15 +1,6 @@
-from pathlib import Path
 import time
 import os
-import urllib3
-import requests
-from datetime import datetime
-from html.parser import HTMLParser
-from urllib.parse import urljoin, urlparse
-import argparse
 import kagglehub
-import certifi
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # =====================
 # Configuración

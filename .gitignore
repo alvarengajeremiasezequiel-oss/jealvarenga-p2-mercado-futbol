@@ -1,0 +1,14 @@
+powerbi/**/.pbi/
+snowflake_keys/*pem
+snowflake_keys/*pub
+snowflake_keys/register_public_key.sql
+.env
+.venv
+data/
+
+__pycache__/
+*.pyc
+
+.idea/
+.vscode/
+*.swp

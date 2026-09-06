@@ -1,0 +1,158 @@
+table FCT_PLAYER_SEASON
+	lineageTag: 56d7d7a1-c742-4db2-825c-3fe21b94e149
+
+	measure 'Score medio' = AVERAGE(FCT_PLAYER_SEASON[GOALS])
+		lineageTag: 12a3a150-7133-4582-8ac4-1fec7715947b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Valor de mercado por temporada' = SUM(FCT_PLAYER_SEASON[AVERAGE_MARKET_VALUE])
+		lineageTag: dbbd6203-714b-4c9b-b1ec-fdb1c8564cb4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Valor total de mercado' = ```
+			
+			
+			VAR LatestSeason =
+			    CALCULATE(
+			        MAX(DIM_SEASON[SEASON]),
+			        ALL(DIM_SEASON)
+			    )
+			
+			RETURN CALCULATE(
+			    SUM(FCT_PLAYER_SEASON[AVERAGE_MARKET_VALUE]),
+			    DIM_SEASON[SEASON] =
+			        COALESCE(
+			            SELECTEDVALUE(DIM_SEASON[SEASON]),
+			            LatestSeason
+			        )
+			)
+			
+			```
+		lineageTag: 2f8c1f8b-f7f8-475f-973d-31c7f7691281
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column PLAYER_ID
+		dataType: double
+		isHidden
+		lineageTag: 20842cea-924d-4f27-95c5-10a72c70f643
+		summarizeBy: none
+		sourceColumn: PLAYER_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column SEASON
+		dataType: double
+		lineageTag: ed0dd08b-e5b3-4fc0-9ec7-36a4000d48a9
+		summarizeBy: none
+		sourceColumn: SEASON
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CLUB_ID
+		dataType: double
+		isHidden
+		lineageTag: 39360ae7-83f2-461a-942f-e713a2fa5293
+		summarizeBy: none
+		sourceColumn: CLUB_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column COMPETITION_ID
+		dataType: string
+		isHidden
+		lineageTag: b6124e9d-d887-4290-8da2-431e3b011740
+		summarizeBy: none
+		sourceColumn: COMPETITION_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column YELLOW_CARDS
+		dataType: double
+		lineageTag: 72fcf9c4-515a-4529-a51f-4c4d3573b1d5
+		summarizeBy: sum
+		sourceColumn: YELLOW_CARDS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RED_CARDS
+		dataType: double
+		lineageTag: d5a059b0-6db3-4932-9e13-5cc12f659219
+		summarizeBy: sum
+		sourceColumn: RED_CARDS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column GOALS
+		dataType: double
+		lineageTag: 05d4e124-68fe-4f8b-8302-544fa8f18758
+		summarizeBy: sum
+		sourceColumn: GOALS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ASSISTS
+		dataType: double
+		lineageTag: 83a907a0-4519-4636-8917-21839c065148
+		summarizeBy: sum
+		sourceColumn: ASSISTS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_TIME
+		dataType: double
+		lineageTag: 625a8622-3a55-4ace-81bb-323f5ee5c146
+		summarizeBy: sum
+		sourceColumn: AVERAGE_TIME
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVERAGE_MARKET_VALUE
+		dataType: double
+		lineageTag: 336ddb74-ee4d-495d-ab7c-77d51cf8ccbf
+		summarizeBy: sum
+		sourceColumn: AVERAGE_MARKET_VALUE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition FCT_PLAYER_SEASON = m
+		mode: import
+		source =
+				let
+				    Source = Snowflake.Databases("ykgydbq-yt09022.snowflakecomputing.com","COMPUTE_WH",[Implementation="2.0"]),
+				    JUGADORES_FUTBOL_DB_Database = Source{[Name="JUGADORES_FUTBOL_DB",Kind="Database"]}[Data],
+				    GOLD_Schema = JUGADORES_FUTBOL_DB_Database{[Name="GOLD",Kind="Schema"]}[Data],
+				    FCT_PLAYER_SEASON_Table = GOLD_Schema{[Name="FCT_PLAYER_SEASON",Kind="Table"]}[Data]
+				in
+				    FCT_PLAYER_SEASON_Table
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegación
+

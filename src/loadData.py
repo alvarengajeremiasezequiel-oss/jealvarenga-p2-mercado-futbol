@@ -1,39 +1,30 @@
-import glob
 import os
 from pathlib import Path
 import time
 import snowflake.connector
 from cryptography.hazmat.primitives import serialization
+from dotenv import load_dotenv
 
 
-# Definition for github actions
+dotenv_path = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path, override=True)
+
 def load_private_key():
-    
-    #Load RSA private key from environment variable
-    
-    pem = os.environ["SNOWFLAKE_PRIVATE_KEY"].replace("\\n", "\n").encode()
+    # Use the private key from the environment variable (CI) or from the local file
+    pem_env = os.environ.get("SNOWFLAKE_PRIVATE_KEY")
+    if pem_env:
+        pem = pem_env.replace("\\n", "\n").encode()
+    else:
+        with open("snowflake_keys/snowflake_key.pem", "rb") as f:
+            pem = f.read()
 
-    key = serialization.load_pem_private_key(
-        pem,
-        password=None,
-    )
-
-    return key.private_bytes(
-        encoding=serialization.Encoding.DER,
-        format=serialization.PrivateFormat.PKCS8,
-        encryption_algorithm=serialization.NoEncryption(),
-    )
-
-# Definition for local run
-"""def load_private_key():
-    with open("snowflake_keys/snowflake_key.pem", "rb") as f:
-        key = serialization.load_pem_private_key(f.read(), password=None)
+    key = serialization.load_pem_private_key(pem, password=None)
 
     return key.private_bytes(
         encoding=serialization.Encoding.DER,
         format=serialization.PrivateFormat.PKCS8,
         encryption_algorithm=serialization.NoEncryption(),
-    )"""
+    )
 
 
 # Helper function for multi statement sql files
